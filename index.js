@@ -7,15 +7,13 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-app.get('/sleep/:duration', (req, res) => {
+app.all('/sleep/:duration', (req, res) => {
   const duration = parseFloat(req.params.duration)
-
   if (isNaN(duration) || duration > 300) {
     return res.status(400).send(`Invalid delay request ${duration}. Max is 300 seconds`)
   }
-  
   setTimeout(() => {
-    res.send(`Delayed request for ${duration} seconds`)
+    return res.send(`Delayed request for ${duration} seconds`)
   }, duration * 1_000)
 })
 
